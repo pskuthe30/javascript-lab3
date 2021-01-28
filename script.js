@@ -27,86 +27,77 @@ let submissions = [
     passed: true,
   },
 ];
-//const addLaptopToInventory = (array, brand, size, price, touchscreen) => {
-//  const newObject = {
-//  brand: brand,
-//size: size,
-//price: price,
-//touchscreen: touchscreen,
-//};
-//array.push(newObject);
-//};
-
 const addSubmission = (array, newName, newScore, newDate) => {
-  const newObject = {
+  const newSubmission = {
     name: newName,
     score: newScore,
-    date: newDate,
+    Date: newDate,
     passed: newScore >= 60,
   };
-  array.push(newObject);
+  array.push(newSubmission);
 };
-//console.log(addSubmission(submissions, "Pallavi", 100, "A date"));
-//console.log(submissions);
-const deleteSubmissionByIndex = (array, index) => {
-  return array.splice(index);
-};
-console.log(deleteSubmissionByIndex(submissions, 5));
-//console.log(submissions);
-
-const deleteSubmissionByName = (array, name) => {
-  let index = array.findIndex((submissions) => {
-    return submissions.name === name;
-  });
-  return array.splice(index, 1);
-};
-console.log(deleteSubmissionByName(submissions, "Jill"));
+addSubmission(submissions, "Pallavi", 83, "A date");
 console.log(submissions);
 
-const editSubmission = (array, index, score) => {};
+const deleteSubmissionByIndex = (array, index) => {
+  array.splice(index, 1);
+};
+const deleteSubmissionByName = (array, name) => {
+  const index = array.findIndex((item) => {
+    item.name == name;
+  });
+  array.splice(index, 1);
+};
+
+const editSubmission = (array, index, score) => {
+  array[index].score = score;
+  array[index].passed = score >= 60;
+};
 
 const findSubmissionByName = (array, name) => {
-  return array.find((item) => {
-    return item.name == name;
+  return array.find((submission) => {
+    return submission.name === name;
   });
 };
-console.log(findSubmissionByName(submissions, "Jack"));
-
+//const findLowestScore = (array) => {
+//let currentLowest = array[0];
+//array.forEach = (item) => {
+//if (item.score < currentLowest.score) {
+//currentLowest = item;
+//}
+//};
+//return currentLowest;
+//};
+//console.log(findLowestScore(submissions));
 const findLowestScore = (array) => {
-  let lowest = 0;
-  let currentScore = array.forEach((submissions) => {
-    if (array.score <= submissions.score) {
-      lowest = array.score;
-    } else {
-      lowest = submissions.score;
-    }
+  return array.reduce((accumulator, currentValue) => {
+    return currentValue.score < accumulator.score ? currentValue : accumulator;
   });
 };
-
 console.log(findLowestScore(submissions));
-
+//
+//const finadAverageScore = (array) => {
+//  let.total = 0;
+//  for (let item of array) {
+//    total += item.score;
+//  }
+//  return total / array.length;
+//};
 const finadAverageScore = (array) => {
-  let itemsInArray = array.length;
-  let avgSum = 0;
-  for (let i = 0; i <= itemsInArray; i++) {
-    avgSum += array.score;
-  }
-  return (avgSum = avgSum / itemsInArray);
+  return (
+    array.reduce(
+      (accumulator, currentValue) => accumulator + currentValue.score,
+      0
+    ) / array.length
+  );
 };
-console.log(finadAverageScore(submissions));
-
 const filterPassing = (array) => {
-  let newArray = array.filter((submissions) => {
-    return submissions.passed == true;
+  array.filter(() => {
+    return item.passed;
   });
-  return newArray;
 };
-console.log(filterPassing(submissions));
-
 const filter90AndAbove = (array) => {
-  let newArray = array.filter((submissions) => {
-    return submissions.score >= 90;
+  array.filter((item) => {
+    return item.passed;
   });
-  return newArray;
 };
-console.log(filter90AndAbove(submissions));
